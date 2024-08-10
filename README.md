@@ -252,7 +252,6 @@ local function BringMobsTo(_Enemie, targetCFrame, SBring)
         if PP and (PP.Position - targetCFrame.p).Magnitude < 500 then
           PP.CFrame = targetCFrame
           PP.CanCollide = false
-          PP.Head.CanCollide = false
           
         end
       end
