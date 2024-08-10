@@ -248,7 +248,7 @@ end
 local function BringMobsTo(_Enemie, CFrame, SBring)
   for _,v in ipairs(Monsters:GetChildren()) do
     if (SBring or v.Name == _Enemie) and IsAlive(v) then
-      local PP, Hum = v.PrimaryPart, v.Humanoid
+      local PP, Hum = v.HumanoidRootPart, v.Humanoid
       if PP and (PP.Position - CFrame.p).Magnitude < 500 then
         Hum.WalkSpeed = 0
         PP.CFrame = CFrame
@@ -261,10 +261,10 @@ end
 
 local function KillMonster(_Enemie, SBring)
   local Enemy = typeof(_Enemie) == "Instance" and _Enemie or GetNextEnemie(_Enemie)
-  if IsAlive(Enemy) and Enemy.PrimaryPart then
-    GoTo(Enemy.PrimaryPart.CFrame * Settings.FarmCFrame)EquipWeapon()
+  if IsAlive(Enemy) and Enemy.HumanoidRootPart then
+    GoTo(Enemy.HumanoidRootPart.CFrame * Settings.FarmCFrame)EquipWeapon()
     if not Enemy:FindFirstChild("Reverse_Mark") then PlayerClick() end
-    if Settings.BringMobs then BringMobsTo(_Enemie, Enemy.PrimaryPart.CFrame, SBring) end
+    if Settings.BringMobs then BringMobsTo(_Enemie, Enemy.HumanoidRootPart.CFrame, SBring) end
     return true
   end
 end
