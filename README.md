@@ -251,10 +251,8 @@ local function BringMobsTo(_Enemie, CFrame, SBring)
       local PP, Hum = v.PrimaryPart, v.Humanoid
       if PP and (PP.Position - CFrame.p).Magnitude < 500 then
         Hum.WalkSpeed = 0
-        Hum:ChangeState(14)
         PP.CFrame = CFrame
         PP.CanCollide = false
-        PP.Transparency = Settings.ViewHitbox and 0.8 or 1
       end
     end
   end
