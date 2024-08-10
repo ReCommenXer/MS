@@ -250,9 +250,11 @@ local function BringMobsTo(_Enemie, targetCFrame, SBring)
       if (SBring or v.Name == _Enemie) and IsAlive(v) then
         local PP, Hum = v.HumanoidRootPart, v.Humanoid
         if PP and (PP.Position - targetCFrame.p).Magnitude < 500 then
-          PP.CFrame = targetCFrame
+            Hum:ChangeState(14)
+            Hum.WalkSpeed = 0
+            PP.CFrame = targetCFrame
           PP.CanCollide = false
-          
+  
         end
       end
     end
