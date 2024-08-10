@@ -245,23 +245,21 @@ local function EquipWeapon()
   end
 end
 
-local function BringMobsTo(_Enemie, CFrame, SBring)
+local function BringMobsTo(_Enemie, targetCFrame, SBring)
     for _,v in ipairs(Monsters:GetChildren()) do
       if (SBring or v.Name == _Enemie) and IsAlive(v) then
         local PP, Hum = v.HumanoidRootPart, v.Humanoid
-        if PP and (PP.Position - CFrame.p).Magnitude < 500 then
-          Hum.WalkSpeed = 0
-          PP.Velocity = Vector3.new(0, 0, 0) -- ลดความเร็วให้เหลือศูนย์ก่อนย้ายตำแหน่ง
-          PP.CFrame = CFrame
-          wait(0.1) -- รอเวลาสักนิดหลังจากเปลี่ยนตำแหน่ง
-          PP.CanCollide = false
+        if PP and (PP.Position - targetCFrame.p).Magnitude < 500 then
+          Hum.WalkSpeed = 0 -- หยุดการเคลื่อนไหวของมอนสเตอร์
+          PP.CFrame = targetCFrame -- ย้ายมอนสเตอร์ไปยังตำแหน่งที่กำหนด
+          PP.Anchored = true -- ยึดมอนสเตอร์ให้อยู่ที่ตำแหน่งนั้น
+          PP.CanCollide = false -- ปิดการชนกัน
         end
       end
     end
     return pcall(sethiddenproperty, Player, "SimulationRadius", _huge)
   end
   
-
 local function KillMonster(_Enemie, SBring)
   local Enemy = typeof(_Enemie) == "Instance" and _Enemie or GetNextEnemie(_Enemie)
   if IsAlive(Enemy) and Enemy.HumanoidRootPart then
@@ -651,4 +649,3 @@ task.spawn(function()
     end
   end
 end)
-
