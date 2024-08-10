@@ -252,7 +252,8 @@ local function BringMobsTo(_Enemie, targetCFrame, SBring)
         if PP and (PP.Position - targetCFrame.p).Magnitude < 500 then
           PP.CFrame = targetCFrame
           PP.CanCollide = false
-          Hum:ChangeState(Enum.HumanoidStateType.Physics) -- ปิดการทำงานของ Humanoid
+          PP.Head.CanCollide = false
+          
         end
       end
     end
