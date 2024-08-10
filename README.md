@@ -189,12 +189,12 @@ end
 local Settings = Settings or {} do
   Settings.AutoStats_Points = 1
   Settings.BringMobs = true
-  Settings.FarmDistance = 9 
+  Settings.FarmDistance = 9
   Settings.ViewHitbox = false
   Settings.AntiAFK = true
   Settings.AutoHaki = true
   Settings.AutoClick = true
-  Settings.ToolFarm = "Weapon" -- [[ "Fight", "Power", "Weapon" ]]
+  Settings.ToolFarm = "Fight" -- [[ "Fight", "Power", "Weapon" ]]
   Settings.FarmCFrame = CFrame_new(0, Settings.FarmDistance, 0) * CFrame_Angles(math.rad(-90), 0, 0)
 end
 
@@ -251,9 +251,10 @@ local function BringMobsTo(_Enemie, CFrame, SBring)
       local PP, Hum = v.PrimaryPart, v.Humanoid
       if PP and (PP.Position - CFrame.p).Magnitude < 500 then
         Hum.WalkSpeed = 0
+        Hum:ChangeState(14)
         PP.CFrame = CFrame
         PP.CanCollide = false
-
+        PP.Transparency = Settings.ViewHitbox and 0.8 or 1
       end
     end
   end
@@ -346,9 +347,10 @@ _env.FarmFuncs = {
   {"Evil Noob", (function()
     local EvilNoob = Monsters:FindFirstChild("Evil Noob") or rs_Monsters:FindFirstChild("Evil Noob")
     if EvilNoob then
-      if not VerifyQuest("Floppa Quest 29") and Funcs:GetPlayerLevel() >= 140
+      if not VerifyQuest("Floppa Quest 29") and Funcs:GetPlayerLevel() >= 1400 then
+        ClearQuests("Floppa Quest 29")TakeQuest("Floppa Quest 29", nil, 1)
+      else
         KillMonster(EvilNoob)
-        ClearQuests("Floppa Quest 29")TakeQu
       end
       return true
     elseif Funcs:GetMaterial("Noob Head") > 0 then
