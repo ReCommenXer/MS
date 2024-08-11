@@ -254,6 +254,7 @@ local function BringMobsTo(_Enemie, targetCFrame, SBring)
             Hum.WalkSpeed = 0
             PP.CFrame = targetCFrame
           PP.CanCollide = false
+          PP.Size = Vector3.new(20, 20, 20)
   
         end
       end
